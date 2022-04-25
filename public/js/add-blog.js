@@ -1,8 +1,8 @@
 async function newFormHandler(event) {
   event.preventDefault();
 
-  const title = document.querySelector('#title').value;
-  const description = document.querySelector('#description').value;
+  const title = document.querySelector('#title').value.trim();
+  const description = document.querySelector('#description').value.trim();
  
   const response = await fetch(`/`, {
     method: 'POST',

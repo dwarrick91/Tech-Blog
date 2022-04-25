@@ -1,7 +1,19 @@
 const router = require('express').Router();
+const { rejects } = require('assert');
 const { Blog } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
+
+router.get('/new', withAuth, async (req, res) => {
+  try {
+    res.render('addBlog', {
+      loggedIn: req.session.loggedIn
+    })
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // GET all galleries for homepage
 router.get('/', async (req, res) => {
@@ -28,31 +40,6 @@ router.get('/', async (req, res) => {
 
 // GET one gallery
 // Use the custom middleware before allowing the user to access the gallery
-router.get('/gallery/:id', withAuth, async (req, res) => {
-  try {
-    const dbGalleryData = await Gallery.findByPk(req.params.id, {
-      include: [
-        {
-          model: Blog,
-          attributes: [
-            'id',
-            'title',
-            // 'artist',
-            // 'exhibition_date',
-            // 'filename',
-            'description',
-          ],
-        },
-      ],
-    });
-
-    const gallery = dbGalleryData.get({ plain: true });
-    res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
 
 // GET one Blog
 // Use the custom middleware before allowing the user to access the Blog
@@ -69,7 +56,7 @@ router.get('/blog/:id', withAuth, async (req, res) => {
   }
 });
 // get all Blogs
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
   try {
     const dbBlogData = await Blog.findAll({
           attributes: ['title', 'description']
@@ -93,7 +80,7 @@ router.get('/dashboard', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.create({
       title: req.body.title,
