@@ -1,0 +1,42 @@
+<div class="row" style="max-width: 36rem min-width: 36rem;">
+  <div class="card-header">{{#each blogs  }}
+    
+    {{> blog-details}}
+    {{/each}}
+    </div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text"></p>
+  </div>
+</div>
+
+<div class="row add-blog-container">
+    <h2>
+      RSVP with the dish you plan to bring!
+    </h2>
+    <form class="new-blog-form">
+      <label for="title">
+        Dish Name:
+      </label>
+      <br />
+      <textarea id="title" name="title" rows="2" cols="30">
+      {{blog.title}}
+    </textarea>
+      <br />
+      <label for="description">
+        Description:
+      </label>
+      <br />
+      <textarea id="description" name="description" rows="5" cols="30">
+      {{blog.description}}
+    </textarea>
+     
+      <br />
+      <button type="submit" value="Submit">
+        Submit
+      </button>
+    </form>
+  </div>
+
+
+<script src="/js/add-blog.js"></script>
