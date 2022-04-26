@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const { rejects } = require('assert');
-const { Blog } = require('../models');
+const { Blog, User } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
 
-router.get('/new', withAuth, async (req, res) => {
+router.get('/new', 
+withAuth, 
+async (req, res) => {
   try {
     res.render('addBlog', {
       loggedIn: req.session.loggedIn
@@ -15,12 +16,11 @@ router.get('/new', withAuth, async (req, res) => {
   }
 });
 
-// GET all galleries for homepage
+// GET all blogs for homepage
 router.get('/', async (req, res) => {
   try {
     const dbBlogData = await Blog.findAll({
-          attributes: ['title', 'description'],
-        
+          attributes: ['id','title', 'description'],      
       
     });
 
@@ -37,6 +37,7 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 // GET one gallery
 // Use the custom middleware before allowing the user to access the gallery
@@ -59,7 +60,14 @@ router.get('/blog/:id', withAuth, async (req, res) => {
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     const dbBlogData = await Blog.findAll({
-          attributes: ['title', 'description']
+          // attributes: ['id','title', 'description', 'createdAt','user_id'],
+          include: [
+            {
+              model: User,
+              attributes: ['username']
+            }
+          ]
+
         
       
     });
@@ -68,7 +76,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
       blog.get({ plain: true })
       
     );
-
+console.log(req.session.loggedIn);
     res.render('dashboard', {
       blogs,
     
@@ -80,22 +88,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-router.post('/', withAuth, async (req, res) => {
-  try {
-    const blogData = await Blog.create({
-      title: req.body.title,
-      description: req.body.description,
-      
-    });
-    res.render('dashboard', {
-      blogData,
-      loggedIn: req.session.loggedIn,
-    });
-    res.status(200).json(blogData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+
 
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {

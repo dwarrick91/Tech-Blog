@@ -15,26 +15,15 @@ Blog.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // artist: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
-    // exhibition_date: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false,
-    // },
-    // filename: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
+   
     description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    gallery_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'gallery',
+        model: 'user',
         key: 'id',
       },
     },

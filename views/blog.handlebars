@@ -1,9 +1,52 @@
-</section>
-<div style="max-width: 36rem min-width: 36rem;">
-  <div class="card-header"></div>
-  <div class="card-body">
-    <h5 class="card-title">{{blog.title}}</h5>
-    <p class="card-text">{{blog.description}}</p>
-  </div>
-</div>
+<section class="card">
+  
+    <header>{{blog.title}}</header>
+    <p>{{blog.description}}</p>
+    <p>Posted by {{user.username}}</p>
+       {{#if loggedIn}}
+       <section class="row justify-content-sm-around">
+           <section class="col-3">
+            <button id="comment" class="btn-no-style">Comment</button>
+        </section>
 
+           <section class="col-3">
+        <button id="edit" class=" btn-no-style">Edit</button>
+        </section>
+        
+        <section class="col-3">
+         <button id="delete" class="btn-no-style">Delete</button>
+         </section>
+         </section>
+         
+      
+      {{/if}}
+            
+
+</section>
+ <div class="edit-blog-container">
+  <h2>
+    Update Blog
+  </h2>
+  <form class="edit-blog-form">
+    <label for="title">
+      Title:
+    </label>
+    <br />
+   <textarea id="title"  name="title" rows="2" cols="30">
+      {{blog.title}}
+   </textarea>
+    <br />
+    <label for="description">
+      Description:
+    </label>
+    <br />
+    <textarea id="description" class="txtarea" name="description" rows="5" cols="30" value="">
+      {{blog.description}}
+    </textarea>
+    <br />
+    <button type="submit" value="Submit">
+      Submit
+    </button>
+  </form>
+</div>
+<script src="/js/edit-blog.js"></script>
