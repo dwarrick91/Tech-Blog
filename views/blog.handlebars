@@ -2,7 +2,8 @@
   
     <header>{{blog.title}}</header>
     <p>{{blog.description}}</p>
-    <p>Posted by {{user.username}}</p>
+    <p>Posted by {{blog.user.username}}</p>
+    <p>Created: {{blog.createdAt}}</p>
        {{#if loggedIn}}
        <section class="row justify-content-sm-around">
            <section class="col-3">
@@ -13,8 +14,8 @@
         <button id="edit" class=" btn-no-style">Edit</button>
         </section>
         
-        <section class="col-3">
-         <button id="delete" class="btn-no-style">Delete</button>
+        <section class="col-3 blog-list" >
+         <button id="delete" class="btn-no-style" data-id="{{blog.id}}">Delete</button>
          </section>
          </section>
          
@@ -49,4 +50,6 @@
     </button>
   </form>
 </div>
+
 <script src="/js/edit-blog.js"></script>
+<script src="/js/delete-blog.js"></script>

@@ -15,3 +15,33 @@
     <p class="card-text"></p>
   </div>
 </div>
+<div class="row add-blog-container">
+    <h2>
+     Input your New Blog!
+    </h2>
+    <form class="new-blog-form">
+      <label for="title">
+        Title: 
+      </label>
+      <br />
+      <input id="title" name="title" rows="2" cols="30">
+      {{blog.title}}
+      </input>
+      <br />
+      <label for="description">
+        Description:
+      </label>
+      <br />
+      <textarea id="description" name="description" rows="5" cols="30">
+      {{blog.description}}
+    </textarea>
+     
+      <br />
+      <button type="submit" value="Submit">
+        Submit
+      </button>
+    </form>
+  </div>
+
+
+<script src='/js/add-blog.js'></script> 

@@ -12,6 +12,7 @@ async (req, res) => {
       const blogData = await Blog.create({
         title: req.body.title,
         description: req.body.description,
+        user_id: req.session.userId, 
         
       });
       res.render('dashboard', {
@@ -31,7 +32,7 @@ async (req, res) => {
         {
           title: req.body.title,
           description: req.body.description,
-          username: req.body.username,
+        
         },
         {
           where: {
@@ -43,6 +44,28 @@ async (req, res) => {
       res.status(200).json(blog);
     } catch (err) {
       res.status(500).json(err);
+    }
+  });
+  router.delete('/:id', withAuth, async (req, res) => {
+    try {
+      const blogData = await Blog.destroy({
+        where: {
+          id: req.params.id,
+          
+        },
+      });
+  
+      if (!blogData) {
+        res.status(404).json({ message: 'No blog found with this id!' });
+        return;
+      }
+  
+      res.status(200).json(blogData);
+    } catch (err) {
+      
+      
+      res.status(500).json(err);
+      console.log(err);
     }
   });
 
