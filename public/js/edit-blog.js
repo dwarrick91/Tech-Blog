@@ -1,5 +1,6 @@
+
 async function editFormHandler(event) {
-  event.preventDefault();
+  
   const title = document.querySelector('#title').value;
   const description = document.querySelector('#description').value;
   
@@ -10,7 +11,7 @@ async function editFormHandler(event) {
   ];
 
   
-  const response = await fetch(`/api/blogs/${id}`, {
+  const response = await fetch(`/api/blogs/${id}`,  {
     method: 'PUT',
     body: JSON.stringify({
       title,
@@ -25,7 +26,7 @@ async function editFormHandler(event) {
   // What happens if the response is ok?
   // If the response is ok, that means that the dish was updated successfully. 
   if (response.ok) {
-    document.location.replace(`/blog/${id}`);
+    document.location.replace('/dashboard');
   } else {
     alert('Failed to edit dish');
   }

@@ -180,6 +180,13 @@ img {
   background-color: var(--tertiary);
 }
 
+.comment {
+  color: blue;
+}
+.commentTime {
+  font-size: 9px;
+  color: blue;
+}
 .txtarea {
   height: 60px;px;
 }

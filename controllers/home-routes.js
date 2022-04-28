@@ -53,7 +53,11 @@ router.get('/blog/:id', withAuth, async (req, res) => {
           attributes: ['username']
         },
         {model: Comment,
-        // attributes: ['blog_id', 'description'] 
+          include: {
+            model: User,
+            attributes: ['username']
+          }
+        
       }
 
       ],
@@ -98,36 +102,6 @@ console.log(req.session.loggedIn);
     res.status(500).json(err);
   }
 });
-// router.get(`/comments`, async (req, res) => {
-//   try {
-//     const dbCommentData = await Comment.findAll({
-//       include: [
-//         {
-//           model: Blog, 
-//           attributes: ['id','title']
-//         }
-//       ]     
-      
-//     });
-
-//     const comments = dbCommentData.map((comment) =>
-//       comment.get({ plain: true })
-//     );
-//    console.log(comments);
-//     res.render('blog', {
-//       comments,
-//       loggedIn: req.session.loggedIn,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
-
-
-
-
-
 
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {

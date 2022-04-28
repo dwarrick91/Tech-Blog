@@ -26,7 +26,7 @@ async (req, res) => {
   });
 
 
-  router.put('/:id', async (req, res) => {
+  router.put('/:id', withAuth, async (req, res) => {
    
     try {
       const blog = await Blog.update(
@@ -41,7 +41,7 @@ async (req, res) => {
           },
         }
       );
-      
+     
       res.status(200).json(blog);
     } catch (err) {
       res.status(500).json(err);
