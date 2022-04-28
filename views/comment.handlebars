@@ -1,0 +1,23 @@
+<section class="card">
+  
+    <header>{{blog.title}}</header>
+    <p>{{blog.description}}</p>
+    <p>Posted by {{blog.user.username}}</p>
+    <p>Created: {{blog.createdAt}}</p>
+       {{#if loggedIn}}
+       <section class="row justify-content-sm-around">
+           <section class="col-4">
+            <a href="/comment">Comment</a>
+        </section>
+
+           <section class="col-4">
+        <button id="edit" class=" btn-no-style">Edit</button>
+        </section>
+        
+        <section class="col-4 blog-list" >
+         <button id="delete" class="btn-no-style" data-id="{{blog.id}}">Delete</button>
+         </section>
+         </section>
+      {{/if}}
+         
+      

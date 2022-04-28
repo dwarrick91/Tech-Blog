@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blog, User } = require('../models');
+const { Blog, User, Comment } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
 
@@ -50,13 +50,17 @@ router.get('/blog/:id', withAuth, async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['username'],
+          attributes: ['username']
         },
+        {model: Comment,
+        // attributes: ['blog_id', 'description'] 
+      }
+
       ],
     });
 
     const blog = dbBlogData.get({ plain: true});
-
+console.log(blog);
     res.render('blog', { blog, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
@@ -94,25 +98,34 @@ console.log(req.session.loggedIn);
     res.status(500).json(err);
   }
 });
-
-// router.get('/', withAuth, async (req, res) => {
+// router.get(`/comments`, async (req, res) => {
 //   try {
-//     // Find the logged in user based on the session ID
-//     const userData = await User.findByPk(req.session.user_id, {
-//       attributes: { exclude: ['password'] },
-//       include: [{ model: Blog }],
+//     const dbCommentData = await Comment.findAll({
+//       include: [
+//         {
+//           model: Blog, 
+//           attributes: ['id','title']
+//         }
+//       ]     
+      
 //     });
 
-//     const user = userData.get({ plain: true });
-
+//     const comments = dbCommentData.map((comment) =>
+//       comment.get({ plain: true })
+//     );
+//    console.log(comments);
 //     res.render('blog', {
-//       ...user,
-//       logged_in: true
+//       comments,
+//       loggedIn: req.session.loggedIn,
 //     });
 //   } catch (err) {
+//     console.log(err);
 //     res.status(500).json(err);
 //   }
 // });
+
+
+
 
 
 
