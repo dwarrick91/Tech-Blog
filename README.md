@@ -17,13 +17,12 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+Go to the repo at https://github.com/dwarrick91/Tech-Blog
 
 ## Usage
-
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+Go to live deployment at 
+- Create account
+- read, create, update, delete blogs
 
     ```md
     ![alt text](assets/images/screenshot.png)
@@ -60,9 +59,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ## Features
 
-Store user inputs in database using Sequelize 
-Hashing passwords to keep secure
-Being able to Create, Receive, Update, and Delete data
+- Store user inputs in database using Sequelize 
+- Hashing passwords to keep secure
+- Being able to Create, Receive, Update, and Delete data
 
 ## How to Contribute
 
